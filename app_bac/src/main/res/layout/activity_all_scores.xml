@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgr"
+    android:keepScreenOn="true"
+    tools:context=".allScores">
+
+    <TextView
+        android:id="@+id/ScoreTable_TXT_scoreTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score table"
+        android:textSize="70dp"
+        android:textColor="#000000"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp">
+    </TextView>
+<TableLayout
+    android:id="@+id/ScoreTable_TBL_tableScore"
+    android:layout_below="@id/ScoreTable_TXT_scoreTable"
+    android:layout_marginTop="30dp"
+    android:layout_centerInParent="true"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <TableRow
+        android:layout_marginTop="30dp">
+    <TextView
+        android:text="Name: "
+        android:textSize="30dp"
+        android:textColor="#000000">
+    </TextView>
+
+        <TextView
+            android:text="Score: "
+            android:textSize="30dp"
+            android:textColor="#000000">
+    </TextView>
+        <TextView
+            android:text="Date: "
+            android:textSize="30dp"
+            android:textColor="#000000">
+        </TextView>
+    </TableRow>
+</TableLayout>
+    <Button
+        android:id="@+id/ScoreTable_BTN_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Back">
+</Button>
+    <EditText
+        android:id="@+id/allScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </EditText>
+</RelativeLayout>

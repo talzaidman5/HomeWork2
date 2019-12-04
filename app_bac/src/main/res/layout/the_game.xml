@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgr"
+    android:keepScreenOn="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageView
+        android:id="@+id/like1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/like"/>
+
+
+    <ImageView
+        android:id="@+id/like2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/like1"
+        android:src="@drawable/like"/>
+
+    <ImageView
+        android:id="@+id/like3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/like2"
+        android:src="@drawable/like"/>
+
+    <EditText
+        android:id="@+id/theGame_ETD_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/like3"
+        android:layout_marginLeft="15dp"
+        android:ems="6"
+        android:text="Score:"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/theGame_BTN_exit"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_toLeftOf="@id/theGame_BTN_pause"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/exit3"
+        android:ems="6"></Button>
+
+    <Button
+        android:id="@+id/theGame_BTN_pause"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/pause"
+        android:ems="6"></Button>
+
+
+    <GridLayout
+        android:layout_marginLeft="60dp"
+        android:id="@+id/theGame_GRID"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:layout_below="@+id/like1"
+        android:columnCount="3"
+        android:rowCount="6"
+        android:layout_marginTop="10dp"
+        android:layout_above="@+id/theGame_BTN_right"
+        tools:context=".TheGame">
+
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog1"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="0"
+            android:layout_column="0"
+
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog2"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog3"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:src="@drawable/enemy"></ImageView>
+        <ImageView
+            android:id="@+id/theGame_PIC_dog4"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="1"
+            android:layout_column="0"
+
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog5"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog6"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog7"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="2"
+            android:layout_column="0"
+
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog8"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog9"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:src="@drawable/enemy"></ImageView>
+        <ImageView
+            android:id="@+id/theGame_PIC_dog10"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="3"
+            android:layout_column="0"
+
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog11"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog12"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:src="@drawable/enemy"></ImageView>
+        <ImageView
+            android:id="@+id/theGame_PIC_dog13"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="4"
+            android:layout_column="0"
+
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog14"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_dog15"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_row="4"
+            android:layout_column="2"
+            android:src="@drawable/enemy"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_player1"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:src="@drawable/simba"></ImageView>
+        <ImageView
+            android:id="@+id/theGame_PIC_player2"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_row="5"
+            android:layout_column="1"
+
+            android:src="@drawable/simba"></ImageView>
+
+        <ImageView
+            android:id="@+id/theGame_PIC_player3"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_row="5"
+            android:layout_column="2"
+            android:src="@drawable/simba"></ImageView>
+    </GridLayout>
+
+        <Button
+            android:id="@+id/theGame_BTN_left"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/theGame_GRID"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/back"
+            android:src="@drawable/back"/>
+
+        <Button
+            android:id="@+id/theGame_BTN_right"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/next"
+            android:src="@drawable/next"/>
+
+</RelativeLayout>

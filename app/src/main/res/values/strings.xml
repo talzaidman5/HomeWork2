@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HomeWork1 - copy</string>
+
+    <string-array name="Speed">
+        <item>Choose the game speed</item>
+        <item>X1</item>
+        <item>X2</item>
+        <item>X2.5</item>
+        <item>X3</item>
+    </string-array>
+</resources>
