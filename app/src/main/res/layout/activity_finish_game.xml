@@ -1,37 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".finishGame"
     android:orientation="vertical"
     android:keepScreenOn="true"
-    android:background="@drawable/backgr">
+    android:background="@drawable/img_backgr">
 
-    <TextView
-        android:id="@+id/gameOver_TXT_gameOver"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Game over"
-        android:textSize="80sp"
-        android:gravity="center"
-        android:layout_marginTop="80dp"
-        android:textColor="#FFFFFF">
-    </TextView>
-
+    <ImageView
+        android:id="@+id/gameOver_IMG_gameOver"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/img_game_over">
+    </ImageView>
     <EditText
         android:id="@+id/gameOver_TXT_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="You Score:"
-        android:textSize="40sp"
-        android:gravity="left"
-        android:layout_marginTop="150dp"
+        android:textSize="35sp"
+        android:layout_marginTop="120dp"
+        android:ems="8"
         android:layout_marginLeft="10dp"
-        android:layout_below="@+id/gameOver_TXT_gameOver"
+        android:backgroundTint="@android:color/white"
+        android:layout_below="@+id/gameOver_IMG_gameOver"
         android:textColor="#FFFFFF">
     </EditText>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_alignParentTop="true">
 
+    </TextView>
 
     <Button
         android:id="@+id/gameOver_BTN_playAgain"
@@ -46,19 +54,19 @@
         android:text="Play again">
     </Button>
 
-       <Button
-           android:id="@+id/gameOver_BTN_Exit"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentBottom="true"
-           android:layout_toRightOf="@+id/gameOver_BTN_playAgain"
-           android:layout_marginBottom="10dp"
-           android:layout_marginTop="40dp"
-           android:textColor="#FFFFFF"
-           android:background="@android:color/transparent"
-           android:textSize="15sp"
-           android:text="Exit">
-       </Button>
+    <Button
+        android:id="@+id/gameOver_BTN_Exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/gameOver_BTN_playAgain"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="40dp"
+        android:textColor="#FFFFFF"
+        android:background="@android:color/transparent"
+        android:textSize="15sp"
+        android:text="Exit">
+    </Button>
     <Button
         android:id="@+id/gameOver_BTN_allScore"
         android:layout_width="wrap_content"
@@ -72,4 +80,6 @@
         android:layout_marginTop="40dp"
         android:text="all scores">
     </Button>
+
+
 </RelativeLayout>

@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-    android:background="@drawable/backgr">
+    android:background="@drawable/img_backgr">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:gravity="top"
-        android:src="@drawable/main_pic"></ImageView>
+        android:src="@drawable/img_main_pic"></ImageView>
     <Button
         android:id="@+id/main_BTN_NewGame"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:text="New Game"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:background="@android:color/transparent"
         android:textColor="#FFFFFF"
         android:layout_gravity="center">
@@ -27,33 +27,35 @@
         android:id="@+id/main_BTN_settings"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="Settings"
         android:background="@android:color/transparent"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:layout_gravity="center">
     </Button>
     <Button
         android:id="@+id/main_BTN_scoreTable"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:background="@android:color/transparent"
         android:text="Score table"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:layout_gravity="center">
     </Button>
+
+
     <Button
         android:id="@+id/main_BTN_exit"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="Exit"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:layout_gravity="center">
     </Button>
 
@@ -75,28 +77,28 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="bottom"
-            android:src="@drawable/king">
+            android:src="@drawable/img_king">
         </ImageView>
 
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
-        android:src="@drawable/pumbaa">
+        android:src="@drawable/img_pumbaa">
     </ImageView>
 
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
-        android:src="@drawable/monky">
+        android:src="@drawable/img_monky">
     </ImageView>
 
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="bottom"
-            android:src="@drawable/nala"></ImageView>
+            android:src="@drawable/img_nala"></ImageView>
 
 
 </LinearLayout>

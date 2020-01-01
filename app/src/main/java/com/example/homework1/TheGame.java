@@ -1,37 +1,43 @@
 package com.example.homework1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import static android.view.View.GONE;
-import static com.example.homework1.R.drawable.play;
+import androidx.appcompat.app.AppCompatActivity;
+
+import static com.example.homework1.R.drawable.img_play;
 
 public class TheGame extends AppCompatActivity {
 
-    private final int NUMBER_OF_ROW = 5, NUM_OF_COL = 3;
-    private int curLife = 3, positionPlayer = 1, positionSecondPlayer = -1,curCol1,countClick=0,score=1,screenH,screenW,objectH,objectW;
-    private static int speed;
-    private Button theGame_BTN_right, theGame_BTN_left,theGame_BTN_pause,theGame_BTN_exit;
-    private ImageView[] gameLifes, playreMoves;
-    private ImageView[][] matrixGame;
-    private EditText theGame_ETD_score;
-    final Handler handler = new Handler();
-    private Runnable runnable;
-    public static MediaPlayer ring = null;
     public static final String END_SCORE = "com.example.HomeWork1.TheGame.END_SCORE";
+    private Button theGame_BTN_right, theGame_BTN_left, theGame_BTN_pause, theGame_BTN_exit;
+    private int curLife = 3, countClick = 0, score = 0;
+    private final int NUM_OF_ROW = 7, NUM_OF_COL = 5, ENEMY = 1, BUTTERFLY = 2;
+    private ImageView[] gameLife, playerMoves;
+    public MatrixGame matrixGame1, playerMoves1;
+    public static boolean checkIfPlay = true, checkIfButtonOrSensor = true;
+    public static MediaPlayer ring, ring2 = null;
+    final Handler handler = new Handler();
+    private EditText theGame_ETD_score;
+    private ImageView[][] matrixGame;
     private Boolean check = true;
+    private Runnable runnable;
+    private static int speed;
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,54 +46,48 @@ public class TheGame extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        if(extras!=null)
-        {
+        if (extras != null) {
             if (extras.containsKey("SPEED_VALUE")) {
                 speed = extras.getInt("SPEED_VALUE");
             }
         }
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }
+
 
         theGame_BTN_left = findViewById(R.id.theGame_BTN_left);
         theGame_BTN_right = findViewById(R.id.theGame_BTN_right);
         theGame_ETD_score = findViewById(R.id.theGame_ETD_score);
         theGame_BTN_pause = findViewById(R.id.theGame_BTN_pause);
         theGame_BTN_exit = findViewById(R.id.theGame_BTN_exit);
-        playreMoves = new ImageView[]{
+        playerMoves = new ImageView[]{
                 findViewById(R.id.theGame_PIC_player1),
                 findViewById(R.id.theGame_PIC_player2),
-                findViewById(R.id.theGame_PIC_player3)
+                findViewById(R.id.theGame_PIC_player3),
+                findViewById(R.id.theGame_PIC_player4),
+                findViewById(R.id.theGame_PIC_player5)
         };
-        gameLifes = new ImageView[]{
+        gameLife = new ImageView[]{
                 findViewById(R.id.like1),
                 findViewById(R.id.like2),
                 findViewById(R.id.like3)
         };
         matrixGame = new ImageView[][]{{
-                findViewById(R.id.theGame_PIC_dog1), findViewById(R.id.theGame_PIC_dog2), findViewById(R.id.theGame_PIC_dog3)},
-                {findViewById(R.id.theGame_PIC_dog4), findViewById(R.id.theGame_PIC_dog5), findViewById(R.id.theGame_PIC_dog6)},
-                {findViewById(R.id.theGame_PIC_dog7), findViewById(R.id.theGame_PIC_dog8), findViewById(R.id.theGame_PIC_dog9)},
-                {findViewById(R.id.theGame_PIC_dog10), findViewById(R.id.theGame_PIC_dog11), findViewById(R.id.theGame_PIC_dog12)},
-                {findViewById(R.id.theGame_PIC_dog13), findViewById(R.id.theGame_PIC_dog14), findViewById(R.id.theGame_PIC_dog15)},
-        };
-
+                findViewById(R.id.theGame_PIC_dog1), findViewById(R.id.theGame_PIC_dog2), findViewById(R.id.theGame_PIC_dog3), findViewById(R.id.theGame_PIC_dog4), findViewById(R.id.theGame_PIC_dog5)},
+                {findViewById(R.id.theGame_PIC_dog6), findViewById(R.id.theGame_PIC_dog7), findViewById(R.id.theGame_PIC_dog8), findViewById(R.id.theGame_PIC_dog9), findViewById(R.id.theGame_PIC_dog10)},
+                {findViewById(R.id.theGame_PIC_dog11), findViewById(R.id.theGame_PIC_dog12), findViewById(R.id.theGame_PIC_dog13), findViewById(R.id.theGame_PIC_dog14), findViewById(R.id.theGame_PIC_dog15)},
+                {findViewById(R.id.theGame_PIC_dog16), findViewById(R.id.theGame_PIC_dog17), findViewById(R.id.theGame_PIC_dog18), findViewById(R.id.theGame_PIC_dog19), findViewById(R.id.theGame_PIC_dog20)},
+                {findViewById(R.id.theGame_PIC_dog21), findViewById(R.id.theGame_PIC_dog22), findViewById(R.id.theGame_PIC_dog23), findViewById(R.id.theGame_PIC_dog24), findViewById(R.id.theGame_PIC_dog25)},
+                {findViewById(R.id.theGame_PIC_dog26), findViewById(R.id.theGame_PIC_dog27), findViewById(R.id.theGame_PIC_dog28), findViewById(R.id.theGame_PIC_dog29), findViewById(R.id.theGame_PIC_dog30)}};
         startGame();
         start();
+
         theGame_BTN_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               backToMain();
-            }
-        });
-        theGame_BTN_right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveRight();
-            }
-        });
-        theGame_BTN_left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveLeft();
+                backToMain();
             }
         });
         theGame_BTN_pause.setOnClickListener(new View.OnClickListener() {
@@ -96,14 +96,14 @@ public class TheGame extends AppCompatActivity {
                 countClick++;
                 if (countClick % 2 == 1) {
                     handler.removeCallbacksAndMessages(null);
-                    theGame_BTN_pause.setBackgroundResource(play);
+                    theGame_BTN_pause.setBackgroundResource(img_play);
                     theGame_BTN_right.setClickable(false);
                     theGame_BTN_left.setClickable(false);
                     Toast.makeText(getApplicationContext(), "Pause", Toast.LENGTH_SHORT).show();
-                    ring.pause();
-                }
-                else {
-                    handler.postDelayed(runnable,500);
+                    if (checkIfPlay)
+                        ring.pause();
+                } else {
+                    handler.postDelayed(runnable, 500);
                     Toast.makeText(getApplicationContext(), "Continue", Toast.LENGTH_SHORT).show();
                     theGame_BTN_right.setClickable(true);
                     theGame_BTN_left.setClickable(true);
@@ -111,147 +111,211 @@ public class TheGame extends AppCompatActivity {
                 }
             }
         });
-        ring = MediaPlayer.create(this,R.raw.game_song);
-        ring.start();
+        if (checkIfPlay) {
+            ring = MediaPlayer.create(this, R.raw.game_song);
+            ring.start();
+        }
+        if (!checkIfButtonOrSensor) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                mSensorManager.registerListener(sensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            }
+            theGame_BTN_right.setVisibility(View.INVISIBLE);
+            theGame_BTN_left.setVisibility(View.INVISIBLE);
+
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                mSensorManager.unregisterListener(sensorEventListener);
+            }
+            theGame_BTN_left.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    moveLeft();
+                }
+            });
+            theGame_BTN_right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    moveRight();
+                }
+            });
+            theGame_BTN_right.setVisibility(View.VISIBLE);
+            theGame_BTN_left.setVisibility(View.VISIBLE);
+        }
     }
+
+
+
+
+
     public void start() {
         if (check == true) {
             runnable = new Runnable() {
                 @Override
                 public void run() {
                     score += 5;
+                    if ( score% 100 == 0){
+                        matrixGame1.addButterfly();
+                        refreshGame();
+                    }
                     theGame_ETD_score.setText("Score: " + score);
-
-                    if (positionSecondPlayer < NUMBER_OF_ROW - 1) {
-                        positionSecondPlayer++;
-                        matrixGame[positionSecondPlayer][curCol1].setVisibility(View.VISIBLE);
-
-                        if (positionSecondPlayer != 0)
-                            matrixGame[positionSecondPlayer - 1][curCol1].setVisibility(View.INVISIBLE);
-                    } else
-                        curCol1 = checkCol(curCol1, positionSecondPlayer);
+                    int ifAdd = matrixGame1.moveTheEnemy();
+                    if(ifAdd == 1) {
+                        matrixGame1.addNewEnemy();
+                        matrixGame1.numOfEnemy++;
+                    }
+                    refreshGame();
+                    if(check() == true) {
+                        checkIfLose();
+                        if(matrixGame1.numOfEnemy < 2) {
+                            matrixGame1.addNewEnemy();
+                            matrixGame1.numOfEnemy++;
+                        }
+                    }
                     start();
                 };
             };
-            if(speed > 300)
-                speed-=20;
-            handler.postDelayed(runnable, speed);}
+            if(speed > 400)
+                speed-=30;
+            handler.postDelayed(runnable, speed);
+        }
     }
 
+    public void refreshGame(){
 
-    public void startGame() {
-
-        curCol1 = (int) (Math.random() * (3));
+        int [][] math = matrixGame1.getMatrixGame();
         for (int i = 0; i < matrixGame.length; i++) {
             for (int j = 0; j < matrixGame[i].length; j++) {
-                matrixGame[i][j].setVisibility(View.INVISIBLE);
+                if(math[i][j] == 0)
+                    matrixGame[i][j].setVisibility(View.INVISIBLE);
+                else if(math[i][j] == ENEMY)
+                    matrixGame[i][j].setVisibility(View.VISIBLE);
+                else if (math[i][j] == BUTTERFLY){
+                    matrixGame[i][j].setVisibility(View.VISIBLE);
+                    matrixGame[i][j].setImageResource(R.drawable.img_butterflies);
+                }
             }
         }
-        matrixGame[0][curCol1].setVisibility(View.VISIBLE);
-        playreMoves[0].setVisibility(View.INVISIBLE);
-        playreMoves[1].setVisibility(View.VISIBLE);
-        playreMoves[2].setVisibility(View.INVISIBLE);
+        int [] mat = playerMoves1.getPlayerMove();
+        for (int i = 0; i < NUM_OF_COL; i++) {
+            if(mat[i] == 0)
+                playerMoves[i].setVisibility(View.INVISIBLE);
+            else {
+                playerMoves[i].setVisibility(View.VISIBLE);
+                playerMoves1.setPositionPlayer(i);
+            }
+        }
     }
+    public void startGame() {
 
+        matrixGame1 = new MatrixGame(NUM_OF_COL,NUM_OF_ROW);
+        matrixGame1.initMatrix(NUM_OF_COL,NUM_OF_ROW);
+        playerMoves1 = new MatrixGame(NUM_OF_COL,1);
+        playerMoves1.initPlayer(NUM_OF_COL);
+        refreshGame();
+    }
     public void moveRight() {
-
-        positionPlayer++;
-        if (positionPlayer > NUM_OF_COL - 1) {
-            positionPlayer = 0;
-            playreMoves[positionPlayer].setVisibility(View.VISIBLE);
-            playreMoves[positionPlayer + NUM_OF_COL - 1].setVisibility(View.INVISIBLE);
-
-        } else if (positionPlayer < matrixGame.length) {
-            playreMoves[positionPlayer].setVisibility(View.VISIBLE);
-            playreMoves[positionPlayer - 1].setVisibility(View.INVISIBLE);
-        }
+        playerMoves1.moveRight();
+        refreshGame();
     }
-
     public void moveLeft() {
+        playerMoves1.moveLeft();
+        refreshGame();
 
-        positionPlayer--;
-        if (positionPlayer < 0) {
-            positionPlayer = NUM_OF_COL - 1;
-            playreMoves[positionPlayer].setVisibility(View.VISIBLE);
-            playreMoves[0].setVisibility(View.INVISIBLE);
-        } else {
-            playreMoves[positionPlayer].setVisibility(View.VISIBLE);
-            playreMoves[positionPlayer + 1].setVisibility(View.INVISIBLE);
-        }
     }
-
-    public int checkCol(int colNum, int pos) {
-        int rand;
-
-        if (pos == NUMBER_OF_ROW-1) {
-            do {
-                rand = (int) (Math.random() * (3));
-            } while (rand == colNum);
-
-            checkIfLose();
-            matrixGame[0][rand].setVisibility(View.VISIBLE);
-            matrixGame[NUMBER_OF_ROW - 1][colNum].setVisibility(View.INVISIBLE);
-            positionSecondPlayer = 0;
-            return rand;
-        }
-        return colNum;
-    }
-
     public void checkIfLose() {
-        if (curCol1 == positionPlayer) {
+
+        if (matrixGame1.getMatrixGame()[NUM_OF_ROW-1][playerMoves1.getPositionPlayer()] == ENEMY) {
             if (curLife > 1) {
                 curLife--;
-                gameLifes[curLife].setVisibility(View.INVISIBLE);
-                MySignal.vibrate(this, 500);
+                MySignal.vibrate(this, 300);
+                MySignal.animateHearts(gameLife[curLife]);
             } else {
-                gameLifes[curLife - 1].setVisibility(View.INVISIBLE);
+                gameLife[curLife - 1].setVisibility(View.INVISIBLE);
                 finish();
                 check = false;
+                MySignal.vibrate(this, 300);
                 Intent intent = new Intent(this, finishGame.class);
                 intent.putExtra(END_SCORE, score);
+                finish();
                 startActivity(intent);
-                ring.stop();
+                if(checkIfPlay)
+                    ring.stop();
             }
         }
-    }
+        else if(matrixGame1.getMatrixGame()[NUM_OF_ROW-1][playerMoves1.getPositionPlayer()] == BUTTERFLY) {
+            score += 30;
+            Toast.makeText(getApplicationContext(), "Added 30 coin", Toast.LENGTH_SHORT).show();
+            matrixGame1.getMatrixGame()[NUM_OF_ROW-1][playerMoves1.getPositionPlayer()] = 0;
+            ring2 = MediaPlayer.create(this, R.raw.money);
+            MySignal.vibrate(this, 200);
+            if (checkIfPlay == true)
+                ring2.start();
 
+        }
+        for (int i = 0; i <NUM_OF_COL ; i++)
+            matrixGame1.getMatrixGame()[NUM_OF_ROW-1][i] = 0;
+
+        MatrixGame.numOfEnemy --;
+        refreshGame();
+    }
     public void backToMain(){
-        Intent intent = new Intent(this, MainApp.class);
-        startActivity(intent);
+        if (checkIfPlay == true)
+            ring.stop();
+        check =false;
+        finish();
+    }
 
-    }
-    private void setDimensions() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        screenH = displayMetrics.heightPixels - theGame_BTN_left.getLayoutParams().height - gameLifes[0].getLayoutParams().height;
-        screenW = displayMetrics.widthPixels;
-        objectH = screenH/5;
-        objectW = screenW/3;
-        for (int i=0; i<matrixGame.length; i++){
-            for (int j=0; j<matrixGame[0].length; j++){
-                matrixGame[i][j].requestLayout();
-                matrixGame[i][j].getLayoutParams().height = objectH;
-                matrixGame[i][j].getLayoutParams().width = objectW;
-            }
+
+    private  boolean check() {
+        int mat[][]= matrixGame1.getMatrixGame();
+        for (int i = 0; i <NUM_OF_COL ; i++) {
+            if(mat[NUM_OF_ROW-1][i] == 1 )
+                return true;
         }
-        for (int k=0; k<playreMoves.length; k++){
-            playreMoves[k].requestLayout();
-            playreMoves[k].getLayoutParams().height = objectH;
-            playreMoves[k].getLayoutParams().width = objectW;
-        }
+        return false;
     }
+
     @Override
     protected void onStop() {
+        handler.removeCallbacks(runnable);
         super.onStop();
-        ring.pause();
-        handler.removeCallbacksAndMessages(null);
+        if(checkIfPlay)
+            ring.stop();
+        check= true;
     }
+    SensorEventListener sensorEventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float x = 0;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.CUPCAKE) {
+                x = event.values[0];
+            }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ring.start();
-    }
+            if (x > -2 && x < 2) {
+                playerMoves1.getPlayerMove()[playerMoves1.getPositionPlayer()] = 0;
+                playerMoves1.getPlayerMove()[2] = 1;
+            } else if (x >= 2 && x < 7) {
+                playerMoves1.getPlayerMove()[playerMoves1.getPositionPlayer()] = 0;
+                playerMoves1.getPlayerMove()[1] = 1;
+            } else if (x >= 7 &&  x < 10) {
+                playerMoves1.getPlayerMove()[playerMoves1.getPositionPlayer()] = 0;
+                playerMoves1.getPlayerMove()[0] = 1;
+            } else if (x >= -8 && x < -2) {
+                playerMoves1.getPlayerMove()[playerMoves1.getPositionPlayer()] = 0;
+                playerMoves1.getPlayerMove()[3] = 1;
+            } else if (x >= -10 && x < -8) {
+                playerMoves1.getPlayerMove()[playerMoves1.getPositionPlayer()] = 0;
+                playerMoves1.getPlayerMove()[4] = 1;
+            }
+            refreshGame();
+        }
+
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
 }
 
 

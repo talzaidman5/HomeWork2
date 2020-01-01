@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgr"
+    android:background="@drawable/img_backgr"
     android:orientation="vertical"
     android:keepScreenOn="true"
-    tools:context=".Settings">
+    tools:context=".Setting">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,13 +16,28 @@
         android:textSize="40sp"
         android:layout_marginTop="40dp"
         android:gravity="center">
-
     </TextView>
+
+    <EditText
+        android:id="@+id/settings_name"
+        android:layout_marginTop="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Name Here"
+        android:textColorHint="#F5F5F5"
+        android:layout_marginLeft="15dp"
+        android:ems="14"
+        android:textColor="#FFFFFF"
+        android:inputType="textCapSentences"
+        android:backgroundTint="@android:color/white" >
+    </EditText>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
         android:orientation="horizontal">
     <TextView
         android:layout_width="wrap_content"
@@ -40,11 +55,34 @@
             android:layout_height="wrap_content">
         </Spinner>
     </LinearLayout>
+    <Switch
+        android:id="@+id/setting_mute"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Music"
+        >
+    </Switch>
+
+    <Switch
+        android:id="@+id/setting_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:text="Play with button" >
+    </Switch>
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
     <Button
         android:id="@+id/settings_BTN_back"
         android:layout_width="wrap_content"
@@ -55,8 +93,20 @@
         android:layout_marginLeft="10dp"
         android:textColor="#FFFFFF"
         android:background="@android:color/transparent"
-        android:textSize="25sp"
-        android:layout_gravity="bottom">
+        android:textSize="25sp">
 </Button>
+        <Button
+            android:id="@+id/settings_BTN_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/settings_BTN_back"
+            android:textColor="#FFFFFF"
+            android:background="@android:color/transparent"
+            android:textSize="25sp">
+        </Button>
     </RelativeLayout>
 </LinearLayout>

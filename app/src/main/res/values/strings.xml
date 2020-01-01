@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HomeWork1 - copy</string>
+    <string name="app_name">HomeWork1</string>
 
     <string-array name="Speed">
         <item>Choose the game speed</item>
@@ -8,4 +8,8 @@
         <item>X2.5</item>
         <item>X3</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
